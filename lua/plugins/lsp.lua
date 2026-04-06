@@ -38,6 +38,48 @@ return {
     config = function()
       local capabilities = require("blink.cmp").get_lsp_capabilities()
 
+      -- Diagnostics config
+      vim.diagnostic.config({
+        virtual_text = true,
+        signs = true,
+        underline = true,
+        severity_sort = true,
+        update_in_insert = false,
+      })
+
+      -- Diagnostic keymaps
+      vim.keymap.set("n", "<leader>d", vim.diagnostic.open_float)
+      vim.keymap.set("n", "[d", vim.diagnostic.goto_prev)
+      vim.keymap.set("n", "]d", vim.diagnostic.goto_next)
+
+      -- Show diagnostics automatically on hover
+      vim.o.updatetime = 250
+      vim.api.nvim_create_autocmd("CursorHold", {
+        callback = function()
+          vim.diagnostic.open_float(nil, { focus = false })
+        end,
+      })
+
+      -- LSP keymaps
+      vim.api.nvim_create_autocmd("LspAttach", {
+        callback = function(ev)
+          local opts = { buffer = ev.buf, silent = true }
+
+          vim.keymap.set("n", "K", vim.lsp.buf.hover, opts)
+          vim.keymap.set("n", "gd", vim.lsp.buf.definition, opts)
+          vim.keymap.set("n", "gr", vim.lsp.buf.references, opts)
+          vim.keymap.set("n", "gi", vim.lsp.buf.implementation, opts)
+
+          vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, opts)
+          vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, opts)
+
+          vim.keymap.set("n", "<leader>f", function()
+            vim.lsp.buf.format({ async = true })
+          end, opts)
+        end,
+      })
+
+      -- LSP configs
       vim.lsp.config("lua_ls", {
         capabilities = capabilities,
         settings = {
@@ -91,6 +133,6 @@ return {
           "typescriptreact",
         },
       })
-   end,
+    end,
   },
 }
