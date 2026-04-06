@@ -1,0 +1,12 @@
+KEYBINDINGS FOR NETRW FILE EXPLORER
+| key     | action           |
+| ------- | ---------------- |
+| `Enter` | open file        |
+| `-`     | go up directory  |
+| `d`     | create directory |
+| `%`     | create file      |
+| `R`     | rename           |
+| `D`     | delete           |
+| `i`     | change view      |
+| `q`     | close            |
+

@@ -1,0 +1,12 @@
+print("Initializing environment...")
+print("LOADING init.lua...")
+require("config.splash")
+print("-------------------------")
+print("Applying base config")
+require("config.options")
+print("Applying custom keybinds")
+require("config.keybinds")
+print("-------------------------")
+vim.notify("LOADING plugins with Lazy...", vim.log.levels.INFO)
+require("config.lazy")
+
