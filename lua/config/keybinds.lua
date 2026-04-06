@@ -17,32 +17,32 @@ keymap("t", "<leader>q", [[<C-\><C-n><cmd>bd!<CR>]], { silent = true, desc = "Cl
 -- Close current buffer
 keymap("n", "<leader>q", "<cmd>bd!<CR>", { silent = true, desc = "Close buffer" })
 
--- Window navigation in normal mode
-keymap("n", "<C-h>", "<cmd>wincmd h<CR>", { silent = true, desc = "Move left" })
-keymap("n", "<C-j>", "<cmd>wincmd j<CR>", { silent = true, desc = "Move down" })
-keymap("n", "<C-k>", "<cmd>wincmd k<CR>", { silent = true, desc = "Move up" })
-keymap("n", "<C-l>", "<cmd>wincmd l<CR>", { silent = true, desc = "Move right" })
+-- Window navigation in normal mode-
+vim.keymap.set("n", "<C-h>", "<C-w>h", { noremap = true, silent = true })
+vim.keymap.set("n", "<C-j>", "<C-w>j", { noremap = true, silent = true })
+vim.keymap.set("n", "<C-k>", "<C-w>k", { noremap = true, silent = true })
+vim.keymap.set("n", "<C-l>", "<C-w>l", { noremap = true, silent = true })
 
--- Window navigation in terminal mode
+-- - Window navigation in terminal mode
 keymap("t", "<C-h>", [[<C-\><C-n><cmd>wincmd h<CR>]], { silent = true, desc = "Move left from terminal" })
 keymap("t", "<C-j>", [[<C-\><C-n><cmd>wincmd j<CR>]], { silent = true, desc = "Move down from terminal" })
 keymap("t", "<C-k>", [[<C-\><C-n><cmd>wincmd k<CR>]], { silent = true, desc = "Move up from terminal" })
 keymap("t", "<C-l>", [[<C-\><C-n><cmd>wincmd l<CR>]], { silent = true, desc = "Move right from terminal" })
 
--- Netrw-specific mappings
+-- Netrw-specific mappings-
 vim.api.nvim_create_autocmd("FileType", {
   pattern = "netrw",
   callback = function(args)
-    local opts = { buffer = args.buf, silent = true, remap = false }
+    local opts = { buffer = args.buf, noremap = true, silent = true }
 
-    keymap("n", "<C-h>", "<cmd>wincmd h<CR>", opts)
-    keymap("n", "<C-j>", "<cmd>wincmd j<CR>", opts)
-    keymap("n", "<C-k>", "<cmd>wincmd k<CR>", opts)
-    keymap("n", "<C-l>", "<cmd>wincmd l<CR>", opts)
+    vim.keymap.set("n", "<C-h>", "<C-w>h", opts)
+    vim.keymap.set("n", "<C-j>", "<C-w>j", opts)
+    vim.keymap.set("n", "<C-k>", "<C-w>k", opts)
+    vim.keymap.set("n", "<C-l>", "<C-w>l", opts)
   end,
 })
 
--- LSP keymaps
+-- - LSP keymaps
 vim.api.nvim_create_autocmd("LspAttach", {
   callback = function(ev)
     local opts = { buffer = ev.buf, silent = true }
