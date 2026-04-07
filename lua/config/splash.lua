@@ -75,7 +75,7 @@ vim.api.nvim_create_autocmd("VimEnter", {
     vim.opt_local.cursorline = false
 
     local lines = {
-      "DSOLVE > NVIM",
+      "dsolve > nvim",
       "--------------",
       "",
       "project  " .. project_name(),
@@ -106,8 +106,8 @@ vim.api.nvim_create_autocmd("VimEnter", {
     local ns = vim.api.nvim_create_namespace("splash")
 
     for i, line in ipairs(lines) do
-      if line:find("DSOLVE > NVIM", 1, true) then
-        local col = line:find("DSOLVE > NVIM", 1, true) - 1
+      if line:find("dsolve > nvim", 1, true) then
+        local col = line:find("dsolve > nvim", 1, true) - 1
         vim.api.nvim_buf_add_highlight(0, ns, "Title", i - 1, col, col + 14)
       end
 
