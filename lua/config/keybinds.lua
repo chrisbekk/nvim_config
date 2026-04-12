@@ -17,6 +17,11 @@ keymap("t", "<leader>q", [[<C-\><C-n><cmd>bd!<CR>]], { silent = true, desc = "Cl
 -- Close current buffer
 keymap("n", "<leader>q", "<cmd>bd!<CR>", { silent = true, desc = "Close buffer" })
 
+-- Navigate buffers
+vim.keymap.set("n", "<leader>bn", ":bnext<CR>")
+vim.keymap.set("n", "<leader>bp", ":bprev<CR>")
+vim.keymap.set("n", "<leader>bd", ":bd<CR>")
+
 -- Window navigation in normal mode-
 vim.keymap.set("n", "<C-h>", "<C-w>h", { noremap = true, silent = true })
 vim.keymap.set("n", "<C-j>", "<C-w>j", { noremap = true, silent = true })
